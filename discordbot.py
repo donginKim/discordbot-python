@@ -43,7 +43,7 @@ Time depends on server setting time.
 '''
 
 
-@aiocron.crontab('0 10 * * *')
+@aiocron.crontab('00 01 * * *')
 async def alarm01():
     channel = client.get_channel(int(ALERT_01))
 
@@ -61,7 +61,7 @@ async def alarm01():
         await channel.send(embed=embed)
 
 
-@aiocron.crontab('30 21 * * *')
+@aiocron.crontab('30 12 * * *')
 async def alarm02():
     channel = client.get_channel(int(ALERT_01))
 
@@ -70,7 +70,7 @@ async def alarm02():
     await channel.send(embed=embed)
 
 
-@aiocron.crontab('0 12 * * 3')
+@aiocron.crontab('00 03 * * 3')
 async def alarm03():
     channel = client.get_channel(int(ALERT_02))
 

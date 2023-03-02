@@ -1,5 +1,6 @@
 from cmath import log
 from distutils.sysconfig import PREFIX
+from datetime import datetime
 import discord
 from dotenv import load_dotenv
 import aiocron
@@ -22,7 +23,7 @@ client = discord.Client(intents=intents)
 
 @client.event
 async def on_ready():
-    print(f'Logged in as {client.user}.')
+    print(f'Logged in as {client.user}. ({datetime.datetime.now()})')
 
 
 @client.event
@@ -60,7 +61,7 @@ async def alarm01():
         await channel.send(embed=embed)
 
 
-@aiocron.crontab('3 21 * * *')
+@aiocron.crontab('30 21 * * *')
 async def alarm02():
     channel = client.get_channel(int(ALERT_01))
 

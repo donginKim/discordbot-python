@@ -16,7 +16,8 @@ ALERT_01 = os.environ['ALERT_01']
 ALERT_02 = os.environ['ALERT_02']
 ALERT_03 = os.environ['ALERT_03']
 
-client = discord.Client()
+intents = discord.Intents.all()
+client = discord.Client(intents=intents)
 
 
 @client.event

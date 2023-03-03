@@ -46,6 +46,7 @@ Time depends on server setting time.
 @aiocron.crontab('*/1 * * * *')
 async def alarm01():
     print("alert alarm 01")
+    await client.wait_until_ready()
 
     chat = client.get_channel(ALERT_01)
 
@@ -70,6 +71,7 @@ async def alarm01():
 @aiocron.crontab('30 12 * * *', start=True)
 async def alarm02():
     print("alert alarm 02")
+    await client.wait_until_ready()
 
     channel = client.get_channel(int(ALERT_01))
 
@@ -81,6 +83,7 @@ async def alarm02():
 @aiocron.crontab('00 03 * * 3', start=True)
 async def alarm03():
     print("alert alarm 03")
+    await client.wait_until_ready()
 
     channel = client.get_channel(int(ALERT_02))
 

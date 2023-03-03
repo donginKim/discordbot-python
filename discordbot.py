@@ -48,7 +48,7 @@ async def alarm01():
     print("alert alarm 01")
     await client.wait_until_ready()
 
-    chat = client.get_channel(ALERT_01)
+    chat = client.get_channel(int(ALERT_01))
 
     index = random.randrange(1, 24)
     while True:
@@ -80,7 +80,8 @@ async def alarm02():
     await channel.send(embed=embed)
 
 
-@aiocron.crontab('00 03 * * 3', start=True)
+#@aiocron.crontab('00 03 * * 3', start=True)
+@aiocron.crontab('00 03 * * *', start=True)
 async def alarm03():
     print("alert alarm 03")
     await client.wait_until_ready()
@@ -104,10 +105,6 @@ async def alarm03():
     await channel.send(embed=embed)
 
 try:
-    client.loop.create_task(alarm01())
-    client.loop.create_task(alarm02())
-    client.loop.create_task(alarm03())
-
     client.run(TOKEN)
 except discord.errors.LoginFailure as e:
     print("Improper token has been passed.")

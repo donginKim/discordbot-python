@@ -42,8 +42,8 @@ Runs repeatedly every 17:20 every day.
 Time depends on server setting time.
 '''
 
-#@aiocron.crontab('15 02 * * *', start=True)
-@aiocron.crontab('*/1 * * * *')
+
+@aiocron.crontab('57 02 * * *', start=True)
 async def alarm01():
     print("alert alarm 01")
     await client.wait_until_ready()
@@ -54,7 +54,7 @@ async def alarm01():
     while True:
         if 10 < index < 16:
             index = random.randrange(1, 24)
-            print('boop')
+            print('my index is failed')
         else:
             embed = discord.Embed(title="밍고 하시딤 모집 안내", description="밍고-봇 알람 ⏰", color=0xff0000)
             embed.add_field(name="⏱️ 오늘 딤 시간은?", value="오후 10시 00분!", inline=False)
@@ -62,7 +62,6 @@ async def alarm01():
             embed.add_field(name="📌 오늘 딤 위치는?", value="항상 그 위치 😎", inline=False)
             embed.add_field(name="🚫 딤 차단 채널은?", value="11, 12, 13, 14, 15 채널! ", inline=False)
             embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
-            print('boob')
 
             await chat.send(embed=embed)
             break
@@ -80,7 +79,7 @@ async def alarm02():
     await channel.send(embed=embed)
 
 
-#@aiocron.crontab('00 03 * * 3', start=True)
+# @aiocron.crontab('00 03 * * 3', start=True)
 @aiocron.crontab('00 03 * * *', start=True)
 async def alarm03():
     print("alert alarm 03")
@@ -103,6 +102,7 @@ async def alarm03():
                           "\n위 링크 탭에서 '크롬보직' 과 '다음주' 스케줄표 작성요청 드립니다.")
 
     await channel.send(embed=embed)
+
 
 try:
     client.run(TOKEN)

@@ -53,7 +53,7 @@ async def health():
 async def alarm01():
     print("alert alarm 01")
 
-    channel = client.get_channel(int(ALERT_01))
+    chat = client.get_channel(ALERT_01)
 
     index = 11 #random.randrange(1, 24)
     if 10 < index < 16:
@@ -66,7 +66,7 @@ async def alarm01():
         embed.add_field(name="🚫 딤 차단 채널은?", value="11, 12, 13, 14, 15 채널! ", inline=False)
         embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
 
-        await channel.send(embed=embed)
+        await chat.send(embed=embed)
 
 
 @aiocron.crontab('30 12 * * *', start=True)

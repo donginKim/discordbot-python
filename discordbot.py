@@ -4,6 +4,7 @@ from datetime import datetime
 import discord
 from dotenv import load_dotenv
 import aiocron
+import asyncio
 import random
 import os
 
@@ -102,6 +103,8 @@ async def alarm03():
 
     await channel.send(embed=embed)
 
+
+asyncio.get_event_loop().run_forever()
 
 try:
     client.run(TOKEN)

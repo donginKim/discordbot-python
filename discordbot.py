@@ -43,7 +43,7 @@ Time depends on server setting time.
 '''
 
 
-@aiocron.crontab('30 01 * * *')
+@aiocron.crontab('50 01 * * *')
 async def alarm01():
 
     print("alert alarm 01")

@@ -1,10 +1,8 @@
-from cmath import log
-from distutils.sysconfig import PREFIX
 from datetime import datetime
 import discord
 from dotenv import load_dotenv
-import aiocron
 import asyncio
+import aiocron
 import random
 import os
 
@@ -50,7 +48,7 @@ async def health():
     await client.get_channel(int(ALERT_04)).send(f'check... UTC : {datetime.utcnow()}')
 
 
-@aiocron.crontab('0 02 * * *')
+@aiocron.crontab('15 02 * * *')
 async def alarm01():
     print("alert alarm 01")
 
@@ -104,6 +102,9 @@ async def alarm03():
     await channel.send(embed=embed)
 
 
+alarm01.start()
+alarm02.start()
+alarm03.start()
 asyncio.get_event_loop().run_forever()
 
 try:

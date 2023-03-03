@@ -104,6 +104,10 @@ async def alarm03():
     await channel.send(embed=embed)
 
 try:
+    client.loop.create_task(alarm01())
+    client.loop.create_task(alarm02())
+    client.loop.create_task(alarm03())
+
     client.run(TOKEN)
 except discord.errors.LoginFailure as e:
     print("Improper token has been passed.")

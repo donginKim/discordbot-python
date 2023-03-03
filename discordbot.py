@@ -42,12 +42,6 @@ Runs repeatedly every 17:20 every day.
 Time depends on server setting time.
 '''
 
-
-@aiocron.crontab('*/1 * * * *')
-async def health():
-    await client.get_channel(int(ALERT_04)).send(f'check... UTC : {datetime.utcnow()}')
-
-
 #@aiocron.crontab('15 02 * * *', start=True)
 @aiocron.crontab('*/1 * * * *')
 async def alarm01():

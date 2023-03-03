@@ -49,18 +49,21 @@ async def alarm01():
 
     chat = client.get_channel(ALERT_01)
 
-    index = 11 #random.randrange(1, 24)
-    if 10 < index < 16:
-        index = random.randrange(1, 24)
-    else:
-        embed = discord.Embed(title="밍고 하시딤 모집 안내", description="밍고-봇 알람 ⏰", color=0xff0000)
-        embed.add_field(name="⏱️ 오늘 딤 시간은?", value="오후 10시 00분!", inline=False)
-        embed.add_field(name="🗺️ 오늘 딤 채널은?", value=str(index) + " 채널!", inline=False)
-        embed.add_field(name="📌 오늘 딤 위치는?", value="항상 그 위치 😎", inline=False)
-        embed.add_field(name="🚫 딤 차단 채널은?", value="11, 12, 13, 14, 15 채널! ", inline=False)
-        embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
+    index = random.randrange(1, 24)
+    while True:
+        if 10 < index < 16:
+            index = random.randrange(1, 24)
+            print('boop')
+        else:
+            embed = discord.Embed(title="밍고 하시딤 모집 안내", description="밍고-봇 알람 ⏰", color=0xff0000)
+            embed.add_field(name="⏱️ 오늘 딤 시간은?", value="오후 10시 00분!", inline=False)
+            embed.add_field(name="🗺️ 오늘 딤 채널은?", value=str(index) + " 채널!", inline=False)
+            embed.add_field(name="📌 오늘 딤 위치는?", value="항상 그 위치 😎", inline=False)
+            embed.add_field(name="🚫 딤 차단 채널은?", value="11, 12, 13, 14, 15 채널! ", inline=False)
+            embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
+            print('boob')
 
-        await chat.send(embed=embed)
+            await chat.send(embed=embed)
 
 
 @aiocron.crontab('30 12 * * *', start=True)

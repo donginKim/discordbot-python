@@ -43,8 +43,11 @@ Time depends on server setting time.
 '''
 
 
-@aiocron.crontab('00 01 * * *')
+@aiocron.crontab('30 01 * * *')
 async def alarm01():
+
+    print("alert alarm 01")
+
     channel = client.get_channel(int(ALERT_01))
 
     index = random.randrange(1, 24)
@@ -63,6 +66,9 @@ async def alarm01():
 
 @aiocron.crontab('30 12 * * *')
 async def alarm02():
+
+    print("alert alarm 02")
+
     channel = client.get_channel(int(ALERT_01))
 
     embed = discord.Embed(title="밍고 하시딤 시작 30분 전 안내", description="밍고-봇 알람 ⏰")
@@ -72,6 +78,9 @@ async def alarm02():
 
 @aiocron.crontab('00 03 * * 3')
 async def alarm03():
+
+    print("alert alarm 03")
+
     channel = client.get_channel(int(ALERT_02))
 
     embed = discord.Embed(title="크롬바스 스케줄 마감 안내", description="📢 필 독 안 내"

@@ -43,12 +43,13 @@ Time depends on server setting time.
 '''
 
 
-@aiocron.crontab('*/5 * * * *')
+@aiocron.crontab('*/1 * * * *')
 async def health():
+    print(datetime.now())
     await client.get_channel(int(ALERT_04)).send(f'check... UTC : {datetime.utcnow()}')
 
 
-@aiocron.crontab('15 02 * * *')
+@aiocron.crontab('15 02 * * *', start=True)
 async def alarm01():
     print("alert alarm 01")
 
@@ -68,7 +69,7 @@ async def alarm01():
         await channel.send(embed=embed)
 
 
-@aiocron.crontab('30 12 * * *')
+@aiocron.crontab('30 12 * * *', start=True)
 async def alarm02():
     print("alert alarm 02")
 
@@ -79,7 +80,7 @@ async def alarm02():
     await channel.send(embed=embed)
 
 
-@aiocron.crontab('00 03 * * 3')
+@aiocron.crontab('00 03 * * 3', start=True)
 async def alarm03():
     print("alert alarm 03")
 
@@ -101,10 +102,6 @@ async def alarm03():
 
     await channel.send(embed=embed)
 
-
-alarm01.start()
-alarm02.start()
-alarm03.start()
 asyncio.get_event_loop().run_forever()
 
 try:

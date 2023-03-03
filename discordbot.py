@@ -16,6 +16,7 @@ TOKEN = os.environ['TOKEN']
 ALERT_01 = os.environ['ALERT_01']
 ALERT_02 = os.environ['ALERT_02']
 ALERT_03 = os.environ['ALERT_03']
+ALERT_04 = os.environ['ALERT_04']
 
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
@@ -43,9 +44,13 @@ Time depends on server setting time.
 '''
 
 
+@aiocron.crontab('*/5 * * * *')
+async def health():
+    await client.get_channel(int(ALERT_04)).send(f'check... UTC : {datetime.utcnow()}')
+
+
 @aiocron.crontab('50 01 * * *')
 async def alarm01():
-
     print("alert alarm 01")
 
     channel = client.get_channel(int(ALERT_01))
@@ -66,7 +71,6 @@ async def alarm01():
 
 @aiocron.crontab('30 12 * * *')
 async def alarm02():
-
     print("alert alarm 02")
 
     channel = client.get_channel(int(ALERT_01))
@@ -78,7 +82,6 @@ async def alarm02():
 
 @aiocron.crontab('00 03 * * 3')
 async def alarm03():
-
     print("alert alarm 03")
 
     channel = client.get_channel(int(ALERT_02))

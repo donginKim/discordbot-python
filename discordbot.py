@@ -45,17 +45,17 @@ Time depends on server setting time.
 
 @aiocron.crontab('*/1 * * * *')
 async def health():
-    print(datetime.now())
     await client.get_channel(int(ALERT_04)).send(f'check... UTC : {datetime.utcnow()}')
 
 
-@aiocron.crontab('15 02 * * *', start=True)
+#@aiocron.crontab('15 02 * * *', start=True)
+@aiocron.crontab('*/1 * * * *')
 async def alarm01():
     print("alert alarm 01")
 
     channel = client.get_channel(int(ALERT_01))
 
-    index = random.randrange(1, 24)
+    index = 11 #random.randrange(1, 24)
     if 10 < index < 16:
         index = random.randrange(1, 24)
     else:

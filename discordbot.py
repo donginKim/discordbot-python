@@ -1,21 +1,20 @@
 from datetime import datetime
 import discord
 from dotenv import load_dotenv
-import asyncio
 import aiocron
 import random
 import os
 
 load_dotenv()
 
-PREFIX = os.environ['PREFIX']
-TOKEN = os.environ['TOKEN']
+PREFIX = '!'  # os.environ['PREFIX']
+TOKEN = 'MTA3NTA1NzM4NzYyMDI4MjM3OA.Gl5cZz.Zb_vEoSJAFH1_I8OlyCE5NNsSSjWZfw2T6eYnY'  # os.environ['TOKEN']
 
 # Channel ID SET
-ALERT_01 = os.environ['ALERT_01']
-ALERT_02 = os.environ['ALERT_02']
-ALERT_03 = os.environ['ALERT_03']
-ALERT_04 = os.environ['ALERT_04']
+ALERT_01 = '1080754352463036508'  # os.environ['ALERT_01']
+ALERT_02 = '1080754352463036508'  # os.environ['ALERT_02']
+ALERT_03 = '1080754352463036508'  # os.environ['ALERT_03']
+ALERT_04 = '1080754352463036508'  # os.environ['ALERT_04']
 
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
@@ -23,7 +22,7 @@ client = discord.Client(intents=intents)
 
 @client.event
 async def on_ready():
-    print(f'Logged in as {client.user}. \n ({datetime.now()}, UTC : {datetime.utcnow()})')
+    print(f'Logged in as {client.user}.\n({datetime.now()})')
 
 
 @client.event
@@ -42,13 +41,12 @@ Runs repeatedly every 17:20 every day.
 Time depends on server setting time.
 '''
 
-
 @aiocron.crontab('00 03 * * *', start=True)
 async def alarm01():
     print(f'[{datetime.now()}] alert alarm 01')
     await client.wait_until_ready()
 
-    chat = client.get_channel(int(ALERT_01))
+    channel = client.get_channel(int(ALERT_01))
 
     index = random.randrange(1, 24)
     while True:
@@ -63,7 +61,7 @@ async def alarm01():
             embed.add_field(name="🚫 딤 차단 채널은?", value="11, 12, 13, 14, 15 채널! ", inline=False)
             embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
 
-            await chat.send(embed=embed)
+            await channel.send(embed=embed)
             break
 
 
@@ -73,10 +71,23 @@ async def alarm02():
     await client.wait_until_ready()
 
     channel = client.get_channel(int(ALERT_01))
+    messages = await channel.history(limit=1).flatten()
 
-    embed = discord.Embed(title="밍고 하시딤 시작 30분 전 안내", description="밍고-봇 알람 ⏰")
-    embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
-    await channel.send(embed=embed)
+    total = 0
+
+    for message in messages:
+        x = message.content[0:2]
+        if x.isdigit():
+            total = int(x)
+
+    if total >= 11:
+        embed = discord.Embed(title="밍고 하시딤 시작 30분 전 안내", description="밍고-봇 알람 ⏰")
+        embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
+        await channel.send(embed=embed)
+    else:
+        embed = discord.Embed(title="밍고 하시딤 쫑 안내", description="밍고 딤이 쫑 났습니다...")
+        embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
+        await channel.send(embed=embed)
 
 
 @aiocron.crontab('00 03 * * 3', start=True)

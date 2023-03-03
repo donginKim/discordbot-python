@@ -49,7 +49,7 @@ async def health():
     await client.get_channel(int(ALERT_04)).send(f'check... UTC : {datetime.utcnow()}')
 
 
-@aiocron.crontab('50 01 * * *')
+@aiocron.crontab('0 02 * * *')
 async def alarm01():
     print("alert alarm 01")
 

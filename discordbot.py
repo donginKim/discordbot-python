@@ -7,14 +7,14 @@ import os
 
 load_dotenv()
 
-PREFIX = '!'  # os.environ['PREFIX']
-TOKEN = 'MTA3NTA1NzM4NzYyMDI4MjM3OA.Gl5cZz.Zb_vEoSJAFH1_I8OlyCE5NNsSSjWZfw2T6eYnY'  # os.environ['TOKEN']
+PREFIX = os.environ['PREFIX']
+TOKEN = os.environ['TOKEN']
 
 # Channel ID SET
-ALERT_01 = '1080754352463036508'  # os.environ['ALERT_01']
-ALERT_02 = '1080754352463036508'  # os.environ['ALERT_02']
-ALERT_03 = '1080754352463036508'  # os.environ['ALERT_03']
-ALERT_04 = '1080754352463036508'  # os.environ['ALERT_04']
+ALERT_01 = os.environ['ALERT_01']
+ALERT_02 = os.environ['ALERT_02']
+ALERT_03 = os.environ['ALERT_03']
+ALERT_04 = os.environ['ALERT_04']
 
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
@@ -40,6 +40,7 @@ example
 Runs repeatedly every 17:20 every day.
 Time depends on server setting time.
 '''
+
 
 @aiocron.crontab('00 03 * * *', start=True)
 async def alarm01():

@@ -64,6 +64,7 @@ async def alarm01():
             print('boob')
 
             await chat.send(embed=embed)
+            break
 
 
 @aiocron.crontab('30 12 * * *', start=True)

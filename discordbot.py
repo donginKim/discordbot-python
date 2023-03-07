@@ -179,10 +179,6 @@ async def glennBearnaAlarmForSat():
 
     channel = client.get_channel(int(ALERT_04))
 
-    print(f'피드백{Glenn_Bearna_Alarm}')
-    print(f'피드백{Glenn_Bearna}')
-
-
     total = Glenn_Bearna - 1
 
     if total > 0:

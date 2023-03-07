@@ -47,7 +47,6 @@ async def on_raw_reaction_add(payload):
             message = await channel.fetch_message(payload.message_id)
             reaction = get(message.reactions, emoji=payload.emoji.name)
             Glenn_Bearna = reaction.count
-
             print(payload.user_id)
 
 
@@ -161,7 +160,7 @@ async def glennBearnaRecruit():
     print(f'리쿠르트{Glenn_Bearna_Alarm}')
 
 
-@aiocron.crontab('*/1 * * * *', start=True)
+@aiocron.crontab('*/3 * * * *', start=True)
 async def glennBearnaAlarmForSat():
     print(f'[{datetime.now()}] (discord-bot by amiro) : Call Function Glenn Bearna Alarm')
 

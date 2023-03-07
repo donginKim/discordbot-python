@@ -125,7 +125,7 @@ async def alarm04():
     embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
 
 
-@aiocron.crontab('*/5 * * * *', start=True)
+@aiocron.crontab('*/1 * * * *', start=True)
 async def glennBearnaRecruit():
     print(f'[{datetime.now()}] 글렌 베르나 모집 안내...')
     await client.wait_until_ready()

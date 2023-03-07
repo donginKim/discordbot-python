@@ -20,6 +20,7 @@ ALERT_04 = os.environ['ALERT_04']
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 
+global Glenn_Bearna
 
 @client.event
 async def on_ready():
@@ -34,8 +35,6 @@ async def on_member_join(member):
 
 @client.event
 async def on_raw_reaction_add(payload):
-
-    global Glenn_Bearna
 
     if payload.message_id == Glenn_Bearna_Alarm.id:
         if payload.emoji.name == "1️⃣":

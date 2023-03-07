@@ -40,12 +40,10 @@ async def on_reaction_add(reaction, user):
     global Glenn_Bearna
     global Glenn_Bearna_Alarm
 
-    print(user)
-
-    if reaction.message_id == Glenn_Bearna_Alarm.id:
+    if reaction.message.channel.id == Glenn_Bearna_Alarm.id:
         if reaction.emoji.name == "1️⃣":
-            channel = client.get_channel(reaction.channel_id)
-            message = await channel.fetch_message(reaction.message_id)
+            channel = client.get_channel(reaction.message.channel.id)
+            message = await channel.fetch_message(reaction.message.channel.id)
             reaction = get(message.reactions, emoji=reaction.emoji.name)
             Glenn_Bearna = reaction.count
 

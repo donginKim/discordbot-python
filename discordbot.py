@@ -160,6 +160,9 @@ async def glennBearnaRecruit():
 async def glennBearnaAlarmForSat():
     print(f'[{datetime.now()}] (discord-bot by amiro) : Call Function Glenn Bearna Alarm')
 
+    global Glenn_Bearna
+    global Glenn_Bearna_Alarm
+
     await client.wait_until_ready()
 
     channel = client.get_channel(int(ALERT_04))
@@ -167,9 +170,6 @@ async def glennBearnaAlarmForSat():
     total = Glenn_Bearna - 1
 
     if total > 0:
-        global Glenn_Bearna
-        global Glenn_Bearna_Alarm
-
         embed = discord.Embed(
             title="글렌 베르나, 시작 안내",
             description=""

@@ -91,12 +91,28 @@ async def alarm02():
         await channel.send(embed=embed)
 
 
-@aiocron.crontab('00 03 * * 3', start=True)
+#@aiocron.crontab('00 03 * * 3', start=True)
+@aiocron.crontab('*/1 * * * *', start=True)
 async def alarm03():
     print(f'[{datetime.now()}] alert alarm 03')
     await client.wait_until_ready()
 
     channel = client.get_channel(int(ALERT_02))
+
+    embed = discord.Embed(title="우리.. 글렌 베르나.. 가볼까요?", description="밍고 길드, 글렌 베르나 소풍 가요! 글렌 베르나 파티 모집 안내 📢")
+
+    embed.add_field(name="👉 글렌 베르나 신청 방법 ", value="[작성하러 가기](https://bit.ly/3y4saSk)", inline=True)
+    embed.set_footer(text="💡어이쿠!!! 손이 미끄러졌네!")
+
+    await channel.send(embed=embed)
+
+
+@aiocron.crontab('00 01 * * 4', start=True)
+async def alarm04():
+    print(f'[{datetime.now()}] alert alarm 04')
+    await client.wait_until_ready()
+
+    channel = client.get_channel(int(ALERT_04))
 
     embed = discord.Embed(title="크롬바스 스케줄 마감 안내", description="📢 필 독 안 내"
                                                               "\n\n* 인원이 많아진 관계로 스케줄 관리가 어렵게 되어 google sheet로 관리하게 되었습니다."
@@ -107,12 +123,38 @@ async def alarm03():
                                                               "\n\v\v\v\v\v\v\vex : Q. 10릴 하고 싶은데 토요일만 되요 "
                                                               "\n\v\v\v\v\v\v\v\v\v\v\v\v\vA. 센세,, 되겠습니까? 🤬 "
                                                               "\n\n\n")
+    embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
 
-    embed.add_field(name="👉 크롬 신청서 ", value="[작성하러 가기](https://bit.ly/3y4saSk)", inline=True)
-    embed.set_footer(text="신규 밍고분들 크롬바스 스케줄로 다니실 분 크롬바스정보 게시판에서 최소 스펙 확인 후"
-                          "\n위 링크 탭에서 '크롬보직' 과 '다음주' 스케줄표 작성요청 드립니다.")
 
-    await channel.send(embed=embed)
+
+
+@aiocron.crontab('00 01 * * 4', start=True)
+async def alarm05():
+    print(f'[{datetime.now()}] alert alarm 05')
+    await client.wait_until_ready()
+
+    channel = client.get_channel(int(ALERT_04))
+    messages = await channel.history(limit=1).flatten()
+
+    total = 0
+
+    for message in messages:
+        x = message.content[0:2]
+        if x.isdigit():
+            total = int(x)
+
+    if total < 8:
+        embed = discord.Embed(title="밍고 하시딤 시작 30분 전 안내", description="밍고-봇 알람 ⏰")
+        embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
+        await channel.send(embed=embed)
+    elif 4 < total <= 8:
+        embed = discord.Embed(title="밍고 하시딤 시작 30분 전 안내", description="밍고-봇 알람 ⏰")
+        embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
+        await channel.send(embed=embed)
+    elif total < 2:
+        embed = discord.Embed(title="밍고 하시딤 시작 30분 전 안내", description="밍고-봇 알람 ⏰")
+        embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
+        await channel.send(embed=embed)
 
 
 try:

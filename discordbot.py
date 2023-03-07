@@ -119,10 +119,12 @@ async def alarm03():
 
     embed = discord.Embed(title="우리.. 글렌 베르나.. 가볼까요?", description="밍고 길드, 글렌 베르나 소풍 가요! 글렌 베르나 파티 모집 안내 📢")
 
-    embed.add_field(name="👉 글렌 베르나 신청 방법 ", value="아래 이모지로 신청해주세요! \n 1️⃣토요일  2️⃣일요일", inline=True)
+    embed.add_field(name="👉 글렌 베르나 신청 방법 ", value="\n아래 이모지로 신청해주세요! \n 1️⃣토요일  2️⃣일요일", inline=True)
     embed.set_footer(text="💡어이쿠!!! 손이 미끄러졌네!")
 
-    await channel.send(embed=embed)
+    alarm = await channel.send(embed=embed)
+    alarm.add_reaction("1️⃣")
+    alarm.add_reaction("2️⃣")
 
 
 @aiocron.crontab('00 01 * * 4', start=True)

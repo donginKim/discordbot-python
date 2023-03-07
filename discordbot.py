@@ -21,7 +21,7 @@ intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 
 Glenn_Bearna = 0
-Glenn_Bearna_Alarm = ''
+Glenn_Bearna_Alarm = 0
 
 
 @client.event

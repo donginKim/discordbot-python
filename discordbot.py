@@ -143,6 +143,7 @@ async def alarm04():
     Glenn-Bearna Recruit Alarm Setting
 '''
 
+
 # Glenn-Bearna Recruit alarm
 @aiocron.crontab('*/5 * * * *', start=True)
 async def glenn_bearna_recruit():
@@ -154,9 +155,9 @@ async def glenn_bearna_recruit():
 
     channel = client.get_channel(int(ALERT_04))
 
-    embed = discord.Embed(title="우리.. 글렌 베르나.. 가볼까요?",
+    embed = discord.Embed(title="글렌 베르나 파티 모집 안내 📢",
                           description=""
-                                      "글렌 베르나 파티 모집 안내 📢\n"
+                                      "**우리.. 글렌 베르나.. 가볼까요?**\n"
                                       "밍고 길드,**글렌 베르나** 소풍 가요!\n\n\n"
                                       "👉 **글렌 베르나 신청 방법**\n\n"
                                       "아래 **이모지**로 신청해주세요!\n"
@@ -190,13 +191,15 @@ async def glenn_bearna_alarm_for_sat():
         mention = ''
 
         for user in Glenn_Bearna_SAT_user:
-            text = "<@" + str(user) + "> ,"
+            text = "<@" + str(user) + "> "
             mention += text
 
         embed = discord.Embed(
             title="글렌 베르나, 시작 안내",
             description=""
-                        f"토요일 입장 {mention}"
+                        f"**토요일엔 내가 득템러! 😎**\n"
+                        f"글렌 베르나 **토요일** 🙌 \n\n"
+                        f"{mention}"
         )
 
         await channel.send(embed=embed)
@@ -220,13 +223,15 @@ async def glenn_bearna_alarm_for_sun():
         mention = ''
 
         for user in Glenn_Bearna_SUN_user:
-            text = "<@" + str(user) + "> ,"
+            text = "<@" + str(user) + "> "
             mention += text
 
         embed = discord.Embed(
             title="글렌 베르나, 시작 안내",
             description=""
-                        f"일요일 입장 {mention}"
+                        f"**일요일엔 내가 득템러! 😎**\n"
+                        f"글렌 베르나 **일요일** 👋 \n\n"
+                        f"{mention}"
         )
 
         await channel.send(embed=embed)
@@ -246,10 +251,10 @@ async def reset_all_alarm():
     Glenn_Bearna_SUN = 0
     Glenn_Bearna_SUN_user = []
 
+
 '''
     Glenn-Bearna Recruit Alarm Setting
 '''
-
 
 try:
     client.run(TOKEN)

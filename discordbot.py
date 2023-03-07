@@ -232,7 +232,7 @@ async def glenn_bearna_alarm_for_sun():
         await channel.send(embed=embed)
 
 
-@aiocron.crontab('*/3 * * * *', start=True)
+@aiocron.crontab('*/10 * * * *', start=True)
 async def reset_all_alarm():
     global Glenn_Bearna_Alarm
     global Glenn_Bearna_SAT

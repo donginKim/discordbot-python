@@ -150,10 +150,11 @@ async def glennBearnaRecruit():
     embed.set_thumbnail(url="https://pbs.twimg.com/media/FmvC3_lakAEc8ub?format=jpg&name=900x900")
 
     alarm = await channel.send(embed=embed)
+    Glenn_Bearna_Alarm = alarm.id
+
     await alarm.add_reaction("1️⃣")
     await alarm.add_reaction("2️⃣")
 
-    Glenn_Bearna_Alarm = alarm.id
 
     print(Glenn_Bearna_Alarm + "리쿠르트")
 

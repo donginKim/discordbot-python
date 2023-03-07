@@ -132,9 +132,12 @@ async def glennBearnaRecruit():
 
     channel = client.get_channel(int(ALERT_04))
 
-    embed = discord.Embed(title="우리.. 글렌 베르나.. 가볼까요?", description="밍고 길드, 글렌 베르나 소풍 가요! 글렌 베르나 파티 모집 안내 📢")
+    embed = discord.Embed(title="우리.. 글렌 베르나.. 가볼까요?", description="```md\n"
+                                                                   "밍고 길드, [**글렌 베르나**] 소풍 가요!\n"
+                                                                   "글렌 베르나 파티 모집 안내 📢\n"
+                                                                   "```")
 
-    embed.add_field(name="👉 글렌 베르나 신청 방법 ", value="\n아래 이모지로 신청해주세요! \n 1️⃣토요일  2️⃣일요일", inline=True)
+    embed.add_field(name="👉 글렌 베르나 신청 방법 ", value="\n아래 이모지로 신청해주세요! \n 1️⃣토요일  2️⃣일요일", inline=False)
     embed.set_footer(text="💡어이쿠!!! 손이 미끄러졌네!")
 
     alarm = await channel.send(embed=embed)
@@ -154,7 +157,7 @@ async def glennBearnaAlarm():
 
     channel = client.get_channel(int(ALERT_04))
 
-    await channel.send(Glenn_Bearna)
+    await channel.send(Glenn_Bearna - 1)
     Glenn_Bearna = 0
 
 

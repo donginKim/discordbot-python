@@ -184,7 +184,7 @@ async def glennBearnaAlarmForSat():
         mention = ''
 
         for user in Glenn_Bearna_SAT_user:
-            text = '<@' + user + '> ,'
+            text = "<@" + str(user) + "> ,"
             mention += text
 
         embed = discord.Embed(

@@ -21,6 +21,7 @@ intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 
 Glenn_Bearna = 0
+Glenn_Bearna_Alarm = ''
 
 @client.event
 async def on_ready():
@@ -125,9 +126,9 @@ async def alarm04():
     embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
 
 
-@aiocron.crontab('*/1 * * * *', start=True)
+@aiocron.crontab('*/2 * * * *', start=True)
 async def glennBearnaRecruit():
-    print(f'[{datetime.now()}] 글렌 베르나 모집 안내...')
+    print(f'[{datetime.now()}]-(discord-bot by amiro) : Call Function Glenn Bearna Recruit')
     await client.wait_until_ready()
 
     channel = client.get_channel(int(ALERT_04))
@@ -135,14 +136,13 @@ async def glennBearnaRecruit():
     embed = discord.Embed(title="우리.. 글렌 베르나.. 가볼까요?",
                           description=""
                                       "밍고 길드,**글렌 베르나** 소풍 가요!\n"
-                                      "글렌 베르나 파티 모집 안내 📢\n\n"
+                                      "글렌 베르나 파티 모집 안내 📢\n\n\n"
                                       "👉 **글렌 베르나 신청 방법**\n"
                                       "아래 `이모지`로 신청해주세요!"
-                                      "\n 1️⃣토요일   2️⃣일요일"
+                                      "\n 1️⃣`토요일`   2️⃣`일요일`"
                                       ""
                           )
-
-    embed.set_footer(text="💡어이쿠!!! 손이 미끄러졌네!")
+    embed.set_thumbnail(url="https://pbs.twimg.com/media/FmvC3_lakAEc8ub?format=jpg&name=900x900")
 
     alarm = await channel.send(embed=embed)
     await alarm.add_reaction("1️⃣")
@@ -152,18 +152,22 @@ async def glennBearnaRecruit():
     Glenn_Bearna_Alarm = alarm
 
 @aiocron.crontab('*/1 * * * *', start=True)
-async def glennBearnaAlarm():
-    print(f'[{datetime.now()}] 글렌 베르나 알람 안내...')
-
+async def glennBearnaAlarmForSat():
+    print(f'[{datetime.now()}]-(discord-bot by amiro) : Call Function Glenn Bearna Alarm')
     global Glenn_Bearna
 
     await client.wait_until_ready()
 
     channel = client.get_channel(int(ALERT_04))
 
-    await channel.send(Glenn_Bearna - 1)
-    Glenn_Bearna = 0
+    total = Glenn_Bearna-1
 
+    if total < 0:
+        embed = discord.Embed(
+            title="글렌 베르나, 시작 안내",
+            description=""
+                        "토요일 입장"
+        )
 
 
 @aiocron.crontab('00 01 * * 4', start=True)

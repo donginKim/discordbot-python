@@ -173,13 +173,12 @@ async def glennBearnaAlarmForSat():
     global Glenn_Bearna
     global Glenn_Bearna_Alarm
     global Glenn_Bearna_SAT_user
-    global Glenn_Bearna_SUN_user
 
     await client.wait_until_ready()
 
     channel = client.get_channel(int(ALERT_04))
 
-    total = Glenn_Bearna - 1
+    total = Glenn_Bearna_SAT - 1
 
     if total > 0:
         mention = ''

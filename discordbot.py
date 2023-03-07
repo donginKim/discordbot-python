@@ -71,8 +71,8 @@ async def channel(ctx):
             print('my index is failed')
         else:
             await ctx.channel.send(file=discord.File('fuckers.webp'))
-            await ctx.channel.send("아이쿠 손↗이↗ 미끄러졌네↘    \n\n내 선택은... " + str(index) + "채널이라네!!")
-
+            await ctx.channel.send("**아이쿠 손↗이↗ 미끄러졌네↘ **   \n\n내 선택은... " + str(index) + "채널이라네!!")
+            break
 
 
 '''
@@ -84,6 +84,7 @@ example
 Runs repeatedly every 17:20 every day.
 Time depends on server setting time.
 '''
+
 
 @aiocron.crontab('00 01 * * *', start=True)
 async def alarm01():

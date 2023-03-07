@@ -36,15 +36,15 @@ async def on_member_join(member):
 
 @client.event
 async def on_raw_reaction_add(payload):
-
     global Glenn_Bearna
 
-    if payload.message_id == Glenn_Bearna_Alarm.id:
-        if payload.emoji.name == "1️⃣":
-            channel = client.get_channel(payload.channel_id)
-            message = await channel.fetch_message(payload.message_id)
-            reaction = get(message.reactions, emoji=payload.emoji.name)
-            Glenn_Bearna = reaction.count
+    if Glenn_Bearna_Alarm is not None:
+        if payload.message_id == Glenn_Bearna_Alarm.id:
+            if payload.emoji.name == "1️⃣":
+                channel = client.get_channel(payload.channel_id)
+                message = await channel.fetch_message(payload.message_id)
+                reaction = get(message.reactions, emoji=payload.emoji.name)
+                Glenn_Bearna = reaction.count
 
 
 '''

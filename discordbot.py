@@ -79,7 +79,7 @@ Runs repeatedly every 17:20 every day.
 Time depends on server setting time.
 '''
 
-@aiocron.crontab('00 03 * * *', start=True)
+@aiocron.crontab('00 01 * * *', start=True)
 async def alarm01():
     print(f'[{datetime.now()}] alert alarm 01')
     await client.wait_until_ready()

@@ -20,14 +20,6 @@ ALERT_04 = os.environ['ALERT_04']
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 
-# Glenn Bearna alert var
-Glenn_Bearna = 0
-Glenn_Bearna_Alarm = ''
-
-# Crombas alert var
-Crombas = 0
-Crombas_Alarm = ''
-
 
 @client.event
 async def on_ready():
@@ -42,8 +34,8 @@ async def on_member_join(member):
 
 @client.event
 async def on_raw_reaction_add(payload):
-    global Glenn_Bearna_Alarm
-    global Crombas_Alarm
+
+    global Glenn_Bearna
 
     if payload.message_id == Glenn_Bearna_Alarm.id:
         if payload.emoji.name == "1️⃣":
@@ -155,7 +147,6 @@ async def glennBearnaRecruit():
 async def glennBearnaAlarm():
     print(f'[{datetime.now()}] 글렌 베르나 알람 안내...')
     await client.wait_until_ready()
-    global Glenn_Bearna
 
     channel = client.get_channel(int(ALERT_04))
 

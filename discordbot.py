@@ -123,8 +123,8 @@ async def alarm03():
     embed.set_footer(text="💡어이쿠!!! 손이 미끄러졌네!")
 
     alarm = await channel.send(embed=embed)
-    alarm.add_reaction("1️⃣")
-    alarm.add_reaction("2️⃣")
+    await alarm.add_reaction("1️⃣")
+    await alarm.add_reaction("2️⃣")
 
 
 @aiocron.crontab('00 01 * * 4', start=True)

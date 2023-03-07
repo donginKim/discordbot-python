@@ -62,7 +62,7 @@ async def on_raw_reaction_add(payload):
                 Glenn_Bearna_SUN_user.append(payload.user_id)
 
 
-@client.command
+@client.command(name="channel")
 async def channel(ctx, number):
     if int(number) < 24:
         await ctx.channel.send("안됨")

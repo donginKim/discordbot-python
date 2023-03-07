@@ -70,6 +70,7 @@ async def channel(ctx):
             index = random.randrange(1, 24)
             print('my index is failed')
         else:
+            await ctx.channel.send(file=discord.File('fuckers.webp'))
             await ctx.channel.send("아이쿠 손↗이↗ 미끄러졌네↘    \n\n내 선택은... " + str(index) + "채널이라네!!")
 
 

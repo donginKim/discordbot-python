@@ -20,6 +20,14 @@ ALERT_04 = os.environ['ALERT_04']
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 
+# Glenn Bearna alert var
+Glenn_Bearna = 0
+Glenn_Bearna_Alarm = ''
+
+# Crombas alert var
+Crombas = 0
+Crombas_Alarm = ''
+
 
 @client.event
 async def on_ready():
@@ -30,6 +38,19 @@ async def on_ready():
 async def on_member_join(member):
     await member.guild.get_channel(int(ALERT_03)) \
         .send(member.mention + "은(는) 동료가 되었다!!")
+
+
+@client.event
+async def on_raw_reaction_add(payload):
+    global Glenn_Bearna_Alarm
+    global Crombas_Alarm
+
+    if payload.message_id == Glenn_Bearna_Alarm.id:
+        if payload.emoji.name == "1️⃣":
+            channel = client.get_channel(payload.channel_id)
+            message = await channel.fetch_message(payload.message_id)
+            reaction = get(message.reactions, emoji=payload.emoji.name)
+            Glenn_Bearna = reaction.count
 
 
 '''
@@ -111,11 +132,9 @@ async def alarm04():
     embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
 
 
-gobal_alarm = ''
-
 @aiocron.crontab('*/5 * * * *', start=True)
-async def alarm03():
-    print(f'[{datetime.now()}] alert alarm 03')
+async def glennBearnaRecruit():
+    print(f'[{datetime.now()}] 글렌 베르나 모집 안내...')
     await client.wait_until_ready()
 
     channel = client.get_channel(int(ALERT_04))
@@ -129,23 +148,18 @@ async def alarm03():
     await alarm.add_reaction("1️⃣")
     await alarm.add_reaction("2️⃣")
 
-    gobal_alarm = alarm
-
+    Glenn_Bearna_Alarm = alarm
 
 @aiocron.crontab('*/1 * * * *', start=True)
-@client.event
-async def on_raw_reaction_add(payload):
-    print(f'[{datetime.now()}] alert alarm 0301')
-    global gobal_alarm
+async def glennBearnaAlarm():
+    print(f'[{datetime.now()}] 글렌 베르나 알람 안내...')
+    await client.wait_until_ready()
+    global Glenn_Bearna
 
-    if payload.emoji.name == "1️⃣":
-        channel = client.get_channel(payload.channel_id)
-        message = await channel.fetch_message(payload.message_id)
-        reaction = get(message.reactions, emoji=payload.emoji.name)
-        print(reaction.count)
+    channel = client.get_channel(int(ALERT_04))
 
-
-
+    await channel.send(Glenn_Bearna)
+    Glenn_Bearna = 0
 
 
 

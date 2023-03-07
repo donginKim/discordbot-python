@@ -148,6 +148,7 @@ async def glennBearnaRecruit():
     await alarm.add_reaction("1️⃣")
     await alarm.add_reaction("2️⃣")
 
+    global Glenn_Bearna_Alarm
     Glenn_Bearna_Alarm = alarm
 
 @aiocron.crontab('*/1 * * * *', start=True)

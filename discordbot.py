@@ -23,6 +23,7 @@ client = discord.Client(intents=intents)
 Glenn_Bearna = 0
 Glenn_Bearna_Alarm = ''
 
+
 @client.event
 async def on_ready():
     print(f'Logged in as {client.user}.\n({datetime.now()})')
@@ -128,18 +129,21 @@ async def alarm04():
 
 @aiocron.crontab('*/2 * * * *', start=True)
 async def glennBearnaRecruit():
-    print(f'[{datetime.now()}]-(discord-bot by amiro) : Call Function Glenn Bearna Recruit')
+    print(f'[{datetime.now()}] (discord-bot by amiro) : Call Function Glenn Bearna Recruit')
+
+    global Glenn_Bearna_Alarm
+
     await client.wait_until_ready()
 
     channel = client.get_channel(int(ALERT_04))
 
     embed = discord.Embed(title="우리.. 글렌 베르나.. 가볼까요?",
                           description=""
-                                      "밍고 길드,**글렌 베르나** 소풍 가요!\n"
-                                      "글렌 베르나 파티 모집 안내 📢\n\n\n"
-                                      "👉 **글렌 베르나 신청 방법**\n"
-                                      "아래 `이모지`로 신청해주세요!"
-                                      "\n 1️⃣`토요일`   2️⃣`일요일`"
+                                      "글렌 베르나 파티 모집 안내 📢\n"
+                                      "밍고 길드,**글렌 베르나** 소풍 가요!\n\n\n"
+                                      "👉 **글렌 베르나 신청 방법**\n\n"
+                                      "아래 **이모지**로 신청해주세요!\n"
+                                      "1️⃣`토요일`   2️⃣`일요일`\n"
                                       ""
                           )
     embed.set_thumbnail(url="https://pbs.twimg.com/media/FmvC3_lakAEc8ub?format=jpg&name=900x900")
@@ -148,19 +152,18 @@ async def glennBearnaRecruit():
     await alarm.add_reaction("1️⃣")
     await alarm.add_reaction("2️⃣")
 
-    global Glenn_Bearna_Alarm
     Glenn_Bearna_Alarm = alarm
+
 
 @aiocron.crontab('*/1 * * * *', start=True)
 async def glennBearnaAlarmForSat():
-    print(f'[{datetime.now()}]-(discord-bot by amiro) : Call Function Glenn Bearna Alarm')
-    global Glenn_Bearna
+    print(f'[{datetime.now()}] (discord-bot by amiro) : Call Function Glenn Bearna Alarm')
 
     await client.wait_until_ready()
 
     channel = client.get_channel(int(ALERT_04))
 
-    total = Glenn_Bearna-1
+    total = Glenn_Bearna - 1
 
     if total < 0:
         embed = discord.Embed(
@@ -168,6 +171,8 @@ async def glennBearnaAlarmForSat():
             description=""
                         "토요일 입장"
         )
+
+        await channel.send(embed=embed)
 
 
 @aiocron.crontab('00 01 * * 4', start=True)

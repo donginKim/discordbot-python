@@ -1,6 +1,7 @@
 from datetime import datetime
 import discord
 from dotenv import load_dotenv
+from discord.utils import get
 import aiocron
 import random
 import os
@@ -110,7 +111,9 @@ async def alarm04():
     embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
 
 
-@aiocron.crontab('*/1 * * * *', start=True)
+gobal_alarm = ''
+
+@aiocron.crontab('*/5 * * * *', start=True)
 async def alarm03():
     print(f'[{datetime.now()}] alert alarm 03')
     await client.wait_until_ready()
@@ -125,6 +128,25 @@ async def alarm03():
     alarm = await channel.send(embed=embed)
     await alarm.add_reaction("1️⃣")
     await alarm.add_reaction("2️⃣")
+
+    gobal_alarm = alarm
+
+
+@aiocron.crontab('*/1 * * * *', start=True)
+@client.event
+async def on_raw_reaction_add(payload):
+    print(f'[{datetime.now()}] alert alarm 0301')
+    global gobal_alarm
+
+    if payload.emoji.name == "1️⃣":
+        channel = client.get_channel(payload.channel_id)
+        message = await channel.fetch_message(payload.message_id)
+        reaction = get(message.reactions, emoji=payload.emoji.name)
+        print(reaction.count)
+
+
+
+
 
 
 @aiocron.crontab('00 01 * * 4', start=True)

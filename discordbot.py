@@ -20,7 +20,12 @@ ALERT_04 = os.environ['ALERT_04']
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 
-Glenn_Bearna = 0
+Glenn_Bearna_SAT = 0
+Glenn_Bearna_SUN = 0
+
+Glenn_Bearna_SAT_user = []
+Glenn_Bearna_SUN_user = []
+
 Glenn_Bearna_Alarm = ''
 
 
@@ -37,17 +42,20 @@ async def on_member_join(member):
 
 @client.event
 async def on_raw_reaction_add(payload):
-    global Glenn_Bearna
-
-    print(f'흠{Glenn_Bearna_Alarm}')
+    global Glenn_Bearna_SAT
+    global Glenn_Bearna_SUN
 
     if payload.message_id == Glenn_Bearna_Alarm:
+        channel = client.get_channel(payload.channel_id)
+        message = await channel.fetch_message(payload.message_id)
+        reaction = get(message.reactions, emoji=payload.emoji.name)
+
         if payload.emoji.name == "1️⃣":
-            channel = client.get_channel(payload.channel_id)
-            message = await channel.fetch_message(payload.message_id)
-            reaction = get(message.reactions, emoji=payload.emoji.name)
-            Glenn_Bearna = reaction.count
-            print(payload.user_id)
+            Glenn_Bearna_SAT = reaction.count
+            Glenn_Bearna_SAT_user.append(payload.user_id)
+        elif payload.emoji.name == "2️⃣":
+            Glenn_Bearna_SUN = reaction.count
+            Glenn_Bearna_SUN_user.append(payload.user_id)
 
 
 '''
@@ -157,8 +165,6 @@ async def glennBearnaRecruit():
     await alarm.add_reaction("2️⃣")
 
 
-    print(f'리쿠르트{Glenn_Bearna_Alarm}')
-
 
 @aiocron.crontab('*/3 * * * *', start=True)
 async def glennBearnaAlarmForSat():
@@ -166,6 +172,8 @@ async def glennBearnaAlarmForSat():
 
     global Glenn_Bearna
     global Glenn_Bearna_Alarm
+    global Glenn_Bearna_SAT_user
+    global Glenn_Bearna_SUN_user
 
     await client.wait_until_ready()
 
@@ -178,10 +186,16 @@ async def glennBearnaAlarmForSat():
     total = Glenn_Bearna - 1
 
     if total > 0:
+        mention = ''
+
+        for user in Glenn_Bearna_SAT_user:
+            text = '<@' + user + '> ,'
+            mention += text
+
         embed = discord.Embed(
             title="글렌 베르나, 시작 안내",
             description=""
-                        "토요일 입장"
+                        f"토요일 입장 {mention}"
         )
 
         await channel.send(embed=embed)

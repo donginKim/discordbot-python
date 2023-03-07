@@ -36,7 +36,7 @@ async def on_member_join(member):
 
 
 @client.event
-async def on_raw_reaction_add(payload, user: discord.user):
+async def on_raw_reaction_add(payload):
     global Glenn_Bearna
 
     print(f'흠{Glenn_Bearna_Alarm}')

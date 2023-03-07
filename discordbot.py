@@ -21,7 +21,7 @@ intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 
 Glenn_Bearna = 0
-Glenn_Bearna_Alarm = 0
+Glenn_Bearna_Alarm = ''
 
 
 @client.event
@@ -40,7 +40,7 @@ async def on_reaction_add(reaction, user):
     global Glenn_Bearna
     global Glenn_Bearna_Alarm
 
-    if reaction.message.channel.id == Glenn_Bearna_Alarm.id:
+    if reaction.message.channel.id == int(Glenn_Bearna_Alarm.id):
         if reaction.emoji.name == "1️⃣":
             channel = client.get_channel(reaction.message.channel.id)
             message = await channel.fetch_message(reaction.message.channel.id)

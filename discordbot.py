@@ -38,9 +38,8 @@ async def on_member_join(member):
 @client.event
 async def on_reaction_add(reaction: discord.reaction, user: discord.user):
     global Glenn_Bearna
-    global Glenn_Bearna_Alarm
 
-    print(Glenn_Bearna_Alarm)
+    print(Glenn_Bearna_Alarm + "흠" )
 
     if reaction.message.channel.id == Glenn_Bearna_Alarm:
         if reaction.emoji.name == "1️⃣":
@@ -156,7 +155,7 @@ async def glennBearnaRecruit():
 
     Glenn_Bearna_Alarm = alarm.id
 
-    print(Glenn_Bearna_Alarm)
+    print(Glenn_Bearna_Alarm + "리쿠르트")
 
 
 @aiocron.crontab('*/1 * * * *', start=True)

@@ -1,10 +1,12 @@
-from datetime import datetime
-import discord
-from dotenv import load_dotenv
-from discord.utils import get
-import aiocron
-import random
 import os
+import random
+from datetime import datetime
+
+import aiocron
+import discord
+from discord.ext import commands
+from discord.utils import get
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -18,7 +20,7 @@ ALERT_03 = os.environ['ALERT_03']
 ALERT_04 = os.environ['ALERT_04']
 
 intents = discord.Intents.all()
-client = discord.Client(intents=intents)
+client = commands.Bot(command_prefix=PREFIX, intents=intents)
 
 Glenn_Bearna_SAT = 0
 Glenn_Bearna_SUN = 0
@@ -60,6 +62,13 @@ async def on_raw_reaction_add(payload):
                 Glenn_Bearna_SUN_user.append(payload.user_id)
 
 
+@client.command
+async def channel(ctx, number):
+    if int(number) < 24:
+        await ctx.channel.send("안됨")
+    random.randrange(1, int(number)+1)
+
+
 '''
 Code to send a Discord notification message at a set time.
 
@@ -69,7 +78,6 @@ example
 Runs repeatedly every 17:20 every day.
 Time depends on server setting time.
 '''
-
 
 @aiocron.crontab('00 03 * * *', start=True)
 async def alarm01():
@@ -120,7 +128,7 @@ async def alarm02():
         await channel.send(embed=embed)
 
 
-@aiocron.crontab('00 03 * * 3', start=True)
+@aiocron.crontab('00 01 * * 2', start=True)
 async def alarm04():
     print(f'[{datetime.now()}] alert alarm 04')
     await client.wait_until_ready()
@@ -145,7 +153,7 @@ async def alarm04():
 
 
 # Glenn-Bearna Recruit alarm
-@aiocron.crontab('*/5 * * * *', start=True)
+@aiocron.crontab('00 01 * * 3', start=True)
 async def glenn_bearna_recruit():
     print(f'[{datetime.now()}] (discord-bot by amiro) : Call Function Glenn Bearna Recruit')
 
@@ -161,7 +169,7 @@ async def glenn_bearna_recruit():
                                       "밍고 길드,**글렌 베르나** 소풍 가요!\n\n\n"
                                       "👉 **글렌 베르나 신청 방법**\n\n"
                                       "아래 **이모지**로 신청해주세요!\n"
-                                      "1️⃣`토요일`   2️⃣`일요일`\n"
+                                      "1️⃣`토요일` \v\v 2️⃣`일요일`\n"
                                       ""
                           )
     embed.set_thumbnail(url="https://pbs.twimg.com/media/FmvC3_lakAEc8ub?format=jpg&name=900x900")
@@ -174,7 +182,7 @@ async def glenn_bearna_recruit():
 
 
 # Glenn-Bearna start alarm on saturday
-@aiocron.crontab('*/2 * * * *', start=True)
+@aiocron.crontab('00 01 * * 6', start=True)
 async def glenn_bearna_alarm_for_sat():
     print(f'[{datetime.now()}] (discord-bot by amiro) : Call Function Glenn Bearna Alarm On Saturday')
 
@@ -206,7 +214,7 @@ async def glenn_bearna_alarm_for_sat():
 
 
 # Glenn-Bearna start alarm on sunday
-@aiocron.crontab('*/3 * * * *', start=True)
+@aiocron.crontab('00 01 * * 7', start=True)
 async def glenn_bearna_alarm_for_sun():
     print(f'[{datetime.now()}] (discord-bot by amiro) : Call Function Glenn Bearna Alarm On Sunday')
 
@@ -237,8 +245,10 @@ async def glenn_bearna_alarm_for_sun():
         await channel.send(embed=embed)
 
 
-@aiocron.crontab('*/10 * * * *', start=True)
+@aiocron.crontab('00 13 * * 7', start=True)
 async def reset_all_alarm():
+    print(f'[{datetime.now()}] (discord-bot by amiro) : Call Function Reset All Alarm')
+
     global Glenn_Bearna_Alarm
     global Glenn_Bearna_SAT
     global Glenn_Bearna_SAT_user

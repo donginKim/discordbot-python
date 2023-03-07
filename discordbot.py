@@ -152,7 +152,7 @@ async def glennBearnaRecruit():
     await alarm.add_reaction("1️⃣")
     await alarm.add_reaction("2️⃣")
 
-    Glenn_Bearna_Alarm = alarm
+    Glenn_Bearna_Alarm = alarm.id
 
 
 @aiocron.crontab('*/1 * * * *', start=True)

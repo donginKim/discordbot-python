@@ -119,7 +119,7 @@ async def alarm03():
 
     embed = discord.Embed(title="우리.. 글렌 베르나.. 가볼까요?", description="밍고 길드, 글렌 베르나 소풍 가요! 글렌 베르나 파티 모집 안내 📢")
 
-    embed.add_field(name="👉 글렌 베르나 신청 방법 ", value="[작성하러 가기](https://bit.ly/3y4saSk)", inline=True)
+    embed.add_field(name="👉 글렌 베르나 신청 방법 ", value="아래 이모지로 신청해주세요! \n 1️⃣토요일  2️⃣일요일", inline=True)
     embed.set_footer(text="💡어이쿠!!! 손이 미끄러졌네!")
 
     await channel.send(embed=embed)

@@ -133,7 +133,7 @@ async def glennBearnaRecruit():
     channel = client.get_channel(int(ALERT_04))
 
     embed = discord.Embed(title="우리.. 글렌 베르나.. 가볼까요?", description="```md\n"
-                                                                   "밍고 길드, [**글렌 베르나**] 소풍 가요!\n"
+                                                                   "밍고 길드, **글렌 베르나** 소풍 가요!\n"
                                                                    "글렌 베르나 파티 모집 안내 📢\n"
                                                                    "```")
 

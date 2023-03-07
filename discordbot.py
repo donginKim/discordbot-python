@@ -38,6 +38,7 @@ async def on_member_join(member):
 @client.event
 async def on_raw_reaction_add(payload):
     global Glenn_Bearna
+    global Glenn_Bearna_Alarm
 
     if Glenn_Bearna_Alarm is not None:
         if payload.message_id == Glenn_Bearna_Alarm.id:
@@ -165,7 +166,7 @@ async def glennBearnaAlarmForSat():
 
     total = Glenn_Bearna - 1
 
-    if total < 0:
+    if total > 0:
         embed = discord.Embed(
             title="글렌 베르나, 시작 안내",
             description=""

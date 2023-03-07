@@ -167,6 +167,9 @@ async def glennBearnaAlarmForSat():
     total = Glenn_Bearna - 1
 
     if total > 0:
+        global Glenn_Bearna
+        global Glenn_Bearna_Alarm
+
         embed = discord.Embed(
             title="글렌 베르나, 시작 안내",
             description=""
@@ -174,6 +177,11 @@ async def glennBearnaAlarmForSat():
         )
 
         await channel.send(embed=embed)
+
+        Glenn_Bearna = 0
+        Glenn_Bearna_Alarm = ''
+
+
 
 
 @aiocron.crontab('00 01 * * 4', start=True)

@@ -63,10 +63,15 @@ async def on_raw_reaction_add(payload):
 
 
 @client.command(name="channel")
-async def channel(ctx, number):
-    if int(number) < 24:
-        await ctx.channel.send("안됨")
-    random.randrange(1, int(number)+1)
+async def channel(ctx):
+    index = random.randrange(1, 24)
+    while True:
+        if index == 11:
+            index = random.randrange(1, 24)
+            print('my index is failed')
+        else:
+            await ctx.channel.send("아이쿠 손↗이↗ 미끄러졌네↘    \n\n내 선택은... " + str(index) + "채널이라네!!")
+
 
 
 '''

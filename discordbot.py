@@ -52,10 +52,12 @@ async def on_raw_reaction_add(payload):
 
         if payload.emoji.name == "1️⃣":
             Glenn_Bearna_SAT = reaction.count
-            Glenn_Bearna_SAT_user.append(payload.user_id)
+            if client.user.id != payload.user_id:
+                Glenn_Bearna_SAT_user.append(payload.user_id)
         elif payload.emoji.name == "2️⃣":
             Glenn_Bearna_SUN = reaction.count
-            Glenn_Bearna_SUN_user.append(payload.user_id)
+            if client.user.id != payload.user_id:
+                Glenn_Bearna_SUN_user.append(payload.user_id)
 
 
 '''
@@ -137,8 +139,13 @@ async def alarm04():
     embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
 
 
-@aiocron.crontab('*/2 * * * *', start=True)
-async def glennBearnaRecruit():
+'''
+    Glenn-Bearna Recruit Alarm Setting
+'''
+
+# Glenn-Bearna Recruit alarm
+@aiocron.crontab('*/5 * * * *', start=True)
+async def glenn_bearna_recruit():
     print(f'[{datetime.now()}] (discord-bot by amiro) : Call Function Glenn Bearna Recruit')
 
     global Glenn_Bearna_Alarm
@@ -165,13 +172,12 @@ async def glennBearnaRecruit():
     await alarm.add_reaction("2️⃣")
 
 
+# Glenn-Bearna start alarm on saturday
+@aiocron.crontab('*/2 * * * *', start=True)
+async def glenn_bearna_alarm_for_sat():
+    print(f'[{datetime.now()}] (discord-bot by amiro) : Call Function Glenn Bearna Alarm On Saturday')
 
-@aiocron.crontab('*/3 * * * *', start=True)
-async def glennBearnaAlarmForSat():
-    print(f'[{datetime.now()}] (discord-bot by amiro) : Call Function Glenn Bearna Alarm')
-
-    global Glenn_Bearna
-    global Glenn_Bearna_Alarm
+    global Glenn_Bearna_SAT
     global Glenn_Bearna_SAT_user
 
     await client.wait_until_ready()
@@ -195,39 +201,54 @@ async def glennBearnaAlarmForSat():
 
         await channel.send(embed=embed)
 
-        Glenn_Bearna = 0
-        Glenn_Bearna_Alarm = ''
 
+# Glenn-Bearna start alarm on sunday
+@aiocron.crontab('*/3 * * * *', start=True)
+async def glenn_bearna_alarm_for_sun():
+    print(f'[{datetime.now()}] (discord-bot by amiro) : Call Function Glenn Bearna Alarm On Sunday')
 
+    global Glenn_Bearna_SUN
+    global Glenn_Bearna_SUN_user
 
-
-@aiocron.crontab('00 01 * * 4', start=True)
-async def alarm05():
-    print(f'[{datetime.now()}] alert alarm 05')
     await client.wait_until_ready()
 
     channel = client.get_channel(int(ALERT_04))
-    messages = await channel.history(limit=1).flatten()
 
-    total = 0
+    total = Glenn_Bearna_SUN - 1
 
-    for message in messages:
-        x = message.content[0:2]
-        if x.isdigit():
-            total = int(x)
+    if total > 0:
+        mention = ''
 
-    if total < 8:
-        embed = discord.Embed(title="밍고 하시딤 시작 30분 전 안내", description="밍고-봇 알람 ⏰")
-        embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
+        for user in Glenn_Bearna_SUN_user:
+            text = "<@" + str(user) + "> ,"
+            mention += text
+
+        embed = discord.Embed(
+            title="글렌 베르나, 시작 안내",
+            description=""
+                        f"일요일 입장 {mention}"
+        )
+
         await channel.send(embed=embed)
-    elif 4 < total <= 8:
-        embed = discord.Embed(title="밍고 하시딤 시작 30분 전 안내", description="밍고-봇 알람 ⏰")
-        embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
-        await channel.send(embed=embed)
-    elif total < 2:
-        embed = discord.Embed(title="밍고 하시딤 시작 30분 전 안내", description="밍고-봇 알람 ⏰")
-        embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
-        await channel.send(embed=embed)
+
+
+@aiocron.crontab('*/3 * * * *', start=True)
+async def reset_all_alarm():
+    global Glenn_Bearna_Alarm
+    global Glenn_Bearna_SAT
+    global Glenn_Bearna_SAT_user
+    global Glenn_Bearna_SUN
+    global Glenn_Bearna_SUN_user
+
+    Glenn_Bearna_Alarm = ''
+    Glenn_Bearna_SAT = 0
+    Glenn_Bearna_SAT_user = []
+    Glenn_Bearna_SUN = 0
+    Glenn_Bearna_SUN_user = []
+
+'''
+    Glenn-Bearna Recruit Alarm Setting
+'''
 
 
 try:

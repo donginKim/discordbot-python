@@ -135,7 +135,7 @@ async def alarm02():
         await channel.send(embed=embed)
 
 
-@aiocron.crontab('30 01 * * 3', start=True)
+@aiocron.crontab('00 04 * * 3', start=True)
 async def alarm04():
     print(f'[{datetime.now()}] alert alarm 04')
     await client.wait_until_ready()
@@ -152,6 +152,8 @@ async def alarm04():
                                                               "\n\v\v\v\v\v\v\v\v\v\v\v\v\vA. 센세,, 되겠습니까? 🤬 "
                                                               "\n\n\n")
     embed.set_footer(text="내용 추가 및 기타 수정 문의는 '김비누'")
+
+    await channel.send(embed=embed)
 
 
 '''

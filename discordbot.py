@@ -135,7 +135,7 @@ async def alarm02():
         await channel.send(embed=embed)
 
 
-@aiocron.crontab('00 04 * * 3', start=True)
+@aiocron.crontab('00 01 * * 3', start=True)
 async def alarm04():
     print(f'[{datetime.now()}] alert alarm 04')
     await client.wait_until_ready()

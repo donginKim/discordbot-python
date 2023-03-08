@@ -143,7 +143,7 @@ async def alarm04():
     channel = client.get_channel(int(ALERT_02))
 
     embed = discord.Embed(title="크롬바스 스케줄 마감 안내", description="📢 필 독 안 내"
-                                                              "\n\n* 인원이 많아진 관계로 스케줄 관리가 어렵게 되어 google sheet로 관리하게 되었습니다."
+                                                              "\n\n* 인원이 많아진 관계로 스케줄 관리가 어렵게 되어 [google sheet](https://bit.ly/3y4saSk)로 관리하게 되었습니다."
                                                               "\n* 참여하실 분들만 작성하시되, 이슈가 없을 경우 '이슈 없음' 이라 작성 부탁드립니다."
                                                               "\n* 크롬 스케줄 마감은 수요일 마감이며, 신청하지 않을 경우 제외 됩니다. 🙏🙏🙏 "
                                                               "\n* 매주 스케줄이 동일한 경우 '매주 동일'이라 작성해주시면 자동으로 다음주도 반영됩니다."
@@ -157,7 +157,7 @@ async def alarm04():
 
 
 '''
-    Glenn-Bearna Recruit Alarm Setting
+    Glenn-Bearna Recruit Alarm Setting 
 '''
 
 
@@ -176,6 +176,8 @@ async def glenn_bearna_recruit():
                           description=""
                                       "**우리.. 글렌 베르나.. 가볼까요?**\n"
                                       "밍고 길드,**글렌 베르나** 소풍 가요!\n\n\n"
+                                      "👉 **글렌 베르나 일정 안내**\n\n"
+                                      "토요일, 일요일 16시 00분 시작해요!\n"
                                       "👉 **글렌 베르나 신청 방법**\n\n"
                                       "아래 **이모지**로 신청해주세요!\n"
                                       "1️⃣`토요일` \v\v 2️⃣`일요일`\n"

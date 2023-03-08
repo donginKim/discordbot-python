@@ -193,7 +193,7 @@ async def glenn_bearna_recruit():
 
 
 # Glenn-Bearna start alarm on saturday
-@aiocron.crontab('00 01 * * 5', start=True)
+@aiocron.crontab('00 07 * * 5', start=True)
 async def glenn_bearna_alarm_for_sat():
     print(f'[{datetime.now()}] (discord-bot by amiro) : Call Function Glenn Bearna Alarm On Saturday')
 
@@ -225,7 +225,7 @@ async def glenn_bearna_alarm_for_sat():
 
 
 # Glenn-Bearna start alarm on sunday
-@aiocron.crontab('00 01 * * 6', start=True)
+@aiocron.crontab('00 07 * * 6', start=True)
 async def glenn_bearna_alarm_for_sun():
     print(f'[{datetime.now()}] (discord-bot by amiro) : Call Function Glenn Bearna Alarm On Sunday')
 
